@@ -241,6 +241,29 @@
       top: 0;
       z-index: 1020;
     }
+    
+    /* Estilo para o botão do WhatsApp */
+    .btn-whatsapp {
+      background-color: #25D366;
+      border-color: #25D366;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .btn-whatsapp:hover {
+      background-color: #128C7E;
+      border-color: #128C7E;
+      color: white;
+    }
+    
+    .share-container {
+      display: flex;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
   </style>
 </head>
 <body>
@@ -347,7 +370,7 @@
       { text: "Você evita conflitos e geralmente concorda com os outros mesmo quando não pensa igual?", options: { passivo: true } },
       { text: "Você já expressou insatisfação de forma indireta, através de sarcasmo ou comportamento evasivo?", options: { passivoAgressivo: true } },
       { text: "Você já usou elogios ou favores para conseguir algo de alguém?", options: { manipulador: true } },
-      { text: "Você consegue dizer 'não' quando necessário, sem se sentir culpado?", options: { assertivo: true } },
+      { text: "Você consegue dizer 'não' quando necessário, без se sentir culpado?", options: { assertivo: true } },
       { text: "Em discussões, você frequentemente eleva sua voz ou usa linguagem corporal intimidatória?", options: { agressivo: true } },
       { text: "Você frequentemente pede desculpas, mesmo quando não fez nada de errado?", options: { passivo: true } },
       { text: "Você já concordou com alguém pessoalmente, mas depois criticou essa pessoa pelas costas?", options: { passivoAgressivo: true } },
@@ -483,7 +506,7 @@
       };
       
       const styleDescriptions = {
-        assertivo: "Comunicação clara, direta e respeitosa. Pessoas assertivas expressan suas opiniões e necessidades sem violar os direitos dos outros. São autoconfiantes, mas também respeitosas com as perspectivas alheias.",
+        assertivo: "Comunicação clara, direta e respeitosa. Pessoas assertivas expressam suas opiniões e necessidades sem violar os direitos dos outros. São autoconfiantes, mas também respeitosas com as perspectivas alheias.",
         agressivo: "Comunicação impositiva e dominadora. Pessoas agressivas priorizam suas próprias necessidades, frequentemente às custas dos outros. Podem ser vistas como hostis, intimidantes ou autoritárias.",
         passivo: "Comunicação evasiva e não confrontacional. Pessoas passivas evitam expressar suas opiniões ou necessidades para evitar conflitos. Podem ter dificuldade em dizer 'não' e estabelecer limites.",
         passivoAgressivo: "Comunicação indireta e ambígua. Pessoas passivo-agressivas expressam insatisfação de forma dissimulada, através de sarcasmo, procrastinação ou comportamento evasivo.",
@@ -498,6 +521,10 @@
         manipulador: ["Uso de elogios interesseiros", "Distorção de fatos", "Culpa indireta", "Jogos psicológicos", "Comportamento calculista"]
       };
       
+      // Create WhatsApp share message
+      const whatsappMessage = `Acabei de fazer o teste de Estilo de Comunicação e descobri que meu estilo predominante é *${styleNames[dominant.type]}* (${dominant.percentage}%)! Faça o teste você também para descobrir seu estilo.`;
+      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
+      
       // Create chart
       resultDiv.innerHTML = `
         <div class="text-center mb-4">
@@ -505,6 +532,12 @@
           <p class="lead">Seu estilo de comunicação predominante é:</p>
           <span class="dominant-badge d-inline-block mb-3">${styleNames[dominant.type]} (${dominant.percentage}%)</span>
           <p>${styleDescriptions[dominant.type]}</p>
+        </div>
+        
+        <div class="share-container">
+          <a href="${whatsappUrl}" target="_blank" class="btn btn-whatsapp">
+            <i class="bi bi-whatsapp"></i> Compartilhar no WhatsApp
+          </a>
         </div>
         
         <div class="chart-container">
